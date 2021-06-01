@@ -56,7 +56,7 @@ public class ClientRepository {
 
 	     clint.setFirstName(instaClient.getFirstName());
 	     clint.setLastName(instaClient.getLastName());
-	     if(clint.getMobile_Number()!=(clint.getIdentity_Number()))
+	     if(clint.getMobile_Number()!=(instaClient.getMobile_Number()))
 	     {
 	    	 for(InstaClient checkdup:ll)
 	    	 {

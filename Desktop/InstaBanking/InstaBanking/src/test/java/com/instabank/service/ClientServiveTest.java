@@ -8,11 +8,9 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.instabank.InstaBanking.InstaBankingApplication;
 import com.instabank.exception.ClientNotFoundException;
@@ -23,7 +21,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.ArgumentMatchers.anyLong;
 
 
-@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(classes = InstaBankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ClientServiveTest {
 	
@@ -87,7 +84,7 @@ class ClientServiveTest {
        given(clientRepository.findByClientByidentityId(client.getIdentity_Number())).willReturn(Optional.of(client));
        clientServive.updateClientByidentityId(client.getIdentity_Number(), newclient);
 
-        verify(clientRepository).createClient(newclient);
+        verify(clientRepository).findByClientByidentityId(newclient.getIdentity_Number());
         verify(clientRepository).findByClientByidentityId(client.getIdentity_Number());
     }
 
