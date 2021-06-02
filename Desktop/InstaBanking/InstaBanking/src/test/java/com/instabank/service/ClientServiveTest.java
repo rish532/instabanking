@@ -44,17 +44,17 @@ class ClientServiveTest {
 		InstaClient client = new InstaClient("rish","shukla",1234567890234l,8302803047l, "maharajganj");
 		when(clientRepository.findByClientByidentityId(client.getIdentity_Number())).thenReturn(Optional.of(client));
 		Optional<InstaClient> expected = clientServive.findByClientByidentityId(client.getIdentity_Number());
-		assertEquals(expected, client);
+		assertEquals(expected.get(), client);
 		verify(clientRepository).findByClientByidentityId(client.getIdentity_Number());
 	}
 	
 	@Test
 	void testFindClientBymobile() throws ClientNotFoundException{
 		InstaClient client = new InstaClient("rish","shukla",1234567890234l,8302803047l, "maharajganj");
-		given(clientRepository.findClientBymobile(client.getIdentity_Number())).willReturn(client);
+		given(clientRepository.findClientBymobile(client.getMobile_Number())).willReturn(client);
 		InstaClient expected = clientServive.findClientBymobile(client.getMobile_Number());
 		assertEquals(expected, client);
-		verify(clientRepository).findByClientByidentityId(client.getMobile_Number());
+		verify(clientRepository).findClientBymobile(client.getMobile_Number());
 	}
 	
 	@Test
@@ -84,8 +84,8 @@ class ClientServiveTest {
        given(clientRepository.findByClientByidentityId(client.getIdentity_Number())).willReturn(Optional.of(client));
        clientServive.updateClientByidentityId(client.getIdentity_Number(), newclient);
 
-        verify(clientRepository).findByClientByidentityId(newclient.getIdentity_Number());
-        verify(clientRepository).findByClientByidentityId(client.getIdentity_Number());
+        verify(clientRepository).updateClientByidentityId(client.getIdentity_Number(), newclient);
+//        verify(clientRepository).findByClientByidentityId(client.getIdentity_Number());
     }
 
     @Test
